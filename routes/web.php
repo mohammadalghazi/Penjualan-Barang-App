@@ -1,11 +1,15 @@
 <?php
 
-use App\Http\Controllers\AuthorizeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome');
 
-Route::get('/signin', [AuthorizeController::class, 'signin']);
-Route::get('/signup', [AuthorizeController::class, 'signup']);
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+require __DIR__.'/auth.php';
