@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -7,26 +8,15 @@ Route::get('/', function () {
 });
 
 Route::get('dashboard', function(){
-    return view('dashboard.index');
+    return view('dashboard.index',[
+        'title' => 'Dashboard'
+    ]);
 });
 
-Route::get('dashboard/tables', function(){
-    return view('dashboard.tables');
-});
+Route::resource('dashboard/products', ProductController::class);
 
 Route::get('dashboard/billing', function(){
-    return view('dashboard.billing');
-});
-
-Route::get('profile', function(){
-    return view('profile');
-});
-
-
-Route::get('signin', function(){
-    return view('authorize.signin');
-});
-
-Route::get('signup', function(){
-    return view('authorize.signup');
+    return view('dashboard.billing',[
+        'title' => 'Billing'
+    ]);
 });

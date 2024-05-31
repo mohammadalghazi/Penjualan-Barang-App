@@ -13,6 +13,10 @@ Icon colors
   width: 1em;
 }
 
+a.active .icon{
+  color: #ffe9fa;
+}
+
 .icon use {
   /* icon secondary color - fill */
   fill: #7ea6f6;
