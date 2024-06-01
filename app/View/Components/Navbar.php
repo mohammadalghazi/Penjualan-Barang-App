@@ -4,6 +4,7 @@ namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Request;
 use Illuminate\View\Component;
 
 class Navbar extends Component
@@ -21,6 +22,10 @@ class Navbar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.navbar');
+        $bc = explode('/', Request::path());
+        return view('components.navbar',[
+            'paths' => $bc,
+            'url' => ''
+        ]);
     }
 }
