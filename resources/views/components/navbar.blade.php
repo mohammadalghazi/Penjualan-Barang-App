@@ -5,8 +5,6 @@
             @foreach (Request::segments() as $path)
                 @if ($path != Request::segment(count(Request::segments())))
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ $url .= "/".$path }}">{{ Str::ucfirst($path) }}</a></li>
-                @else
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{ Str::ucfirst($path) }}</li>
                 @endif
             @endforeach
             </ol>
