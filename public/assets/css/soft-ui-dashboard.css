@@ -21842,8 +21842,8 @@ label,
 }
 
 .icon-shape {
-  width: 24px;
-  height: 24px;
+  width: 48px;
+  height: 48px;
   background-position: center;
   border-radius: 0.75rem;
 }
@@ -23226,7 +23226,6 @@ html {
 .sidenav {
   transition: all 0.2s ease-in-out;
 }
-
 .sidenav {
   z-index: 1030;
 }
