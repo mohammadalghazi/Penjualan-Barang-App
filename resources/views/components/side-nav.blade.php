@@ -18,7 +18,9 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Products</h6>
             </li>
             <x-side-nav-item active="{{ Request::is('dashboard/products') }}" href="/dashboard/products" icon="cube-outline">Products</x-side-nav-item>
-            <x-side-nav-item active="{{ Request::is('dashboard/categories') }}" href="/dashboard/categories" icon="pricetags-outline">Category</x-side-nav-item>
+            <x-side-nav-item active="{{ Request::is('dashboard/discounts') }}" href="/dashboard/discounts" icon="pricetag-outline">Discounts</x-side-nav-item>
+            <x-side-nav-item active="{{ Request::is('dashboard/categories') }}" href="/dashboard/categories" icon="menu-outline">Category</x-side-nav-item>
+            <x-side-nav-item active="{{ Request::is('dashboard/sub-categories') }}" href="/dashboard/sub-categories" icon="list-outline">Sub-Category</x-side-nav-item>
             <x-side-nav-item active="{{ Request::is('dashboard/brands') }}" href="/dashboard/brands" icon="business-outline">Brand</x-side-nav-item>
             {{-- <x-side-nav-item active="{{ Request::is('dashboard/billing') }}" href="/dashboard/billing" icon="card">Billing</x-side-nav-item> --}}
 
@@ -26,13 +28,14 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Sales</h6>
             </li>
             <x-side-nav-item active="{{ Request::is('dashboard/sales') }}" href="/dashboard/sales" icon="cart-outline">Sales</x-side-nav-item>
+            <x-side-nav-item active="{{ Request::is('dashboard/orders') }}" href="/dashboard/orders" icon="document-text-outline">Orders</x-side-nav-item>
             <x-side-nav-item active="{{ Request::is('dashboard/shipments') }}" href="/dashboard/shipments" icon="document-text-outline">Shipments</x-side-nav-item>
 
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Manage</h6>
             </li>
             <x-side-nav-item active="{{ Request::is('dashboard/users') }}" href="/dashboard/users" icon="person-outline">User</x-side-nav-item>
-            <x-side-nav-item active="{{ Request::is('dashboard/payments') }}" href="/dashboard/payments" icon="wallet-outline">Gate Payment</x-side-nav-item>
+            <x-side-nav-item active="{{ Request::is('dashboard/payments') }}" href="/dashboard/payments" icon="wallet-outline">Payemnt Gate</x-side-nav-item>
         </ul>
     </div>
 </aside>

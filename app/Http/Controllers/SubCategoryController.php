@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\SubCategory;
+use App\Http\Requests\StoreSubCategoryRequest;
+use App\Http\Requests\UpdateSubCategoryRequest;
 
-class UserController extends Controller
+class SubCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('dashboard.users.index', [
-            'title' => 'User'
+        return view('dashboard.categories.sub.index', [
+            "title" => "Sub-Category"
         ]);
     }
 
@@ -28,7 +29,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreSubCategoryRequest $request)
     {
         //
     }
@@ -36,7 +37,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(SubCategory $subCategory)
     {
         //
     }
@@ -44,7 +45,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(SubCategory $subCategory)
     {
         //
     }
@@ -52,7 +53,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateSubCategoryRequest $request, SubCategory $subCategory)
     {
         //
     }
@@ -60,7 +61,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(SubCategory $subCategory)
     {
         //
     }

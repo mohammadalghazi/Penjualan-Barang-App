@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\Shipment;
+use App\Http\Requests\StoreShipmentRequest;
+use App\Http\Requests\UpdateShipmentRequest;
 
-class UserController extends Controller
+class ShipmentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('dashboard.users.index', [
-            'title' => 'User'
+        return view('dashboard.shipments.index', [
+            'title' => "Pengiriman"
         ]);
     }
 
@@ -28,7 +29,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreShipmentRequest $request)
     {
         //
     }
@@ -36,7 +37,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(Shipment $shipment)
     {
         //
     }
@@ -44,7 +45,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(Shipment $shipment)
     {
         //
     }
@@ -52,7 +53,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateShipmentRequest $request, Shipment $shipment)
     {
         //
     }
@@ -60,7 +61,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(Shipment $shipment)
     {
         //
     }
