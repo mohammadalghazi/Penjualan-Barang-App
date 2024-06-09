@@ -41,4 +41,4 @@ Route::get('dashboard/billing', function(){
     ]);
 });
 
-
+require __DIR__.'/auth.php';
