@@ -36,6 +36,14 @@
             </li>
             <x-side-nav-item active="{{ Request::is('dashboard/users') }}" href="/dashboard/users" icon="person-outline">User</x-side-nav-item>
             <x-side-nav-item active="{{ Request::is('dashboard/payments') }}" href="/dashboard/payments" icon="wallet-outline">Payemnt Gate</x-side-nav-item>
+
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <x-side-nav-item active="{{ Request::is('dashboard/payments') }}" :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();" icon="log-out-outline">
+                    {{ __('Log Out') }}
+                </x-side-nav-item>
+            </form>
+            <x-side-nav-item active="{{ Request::is('dashboard/settings') }}" href="/dashboard/settings" icon="profile-outline">{{ Auth()->user()->name }}</x-side-nav-item>
         </ul>
     </div>
 </aside>
