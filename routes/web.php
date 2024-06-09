@@ -18,13 +18,17 @@ Route::get('dashboard', function(){
     return view('dashboard.index',[
         'title' => 'Dashboard'
     ]);
+})->middleware('auth');
+Route::middleware('auth')->group(function () {  
+    Route::resource('dashboard/products', ProductController::class);
+    Route::resource('dashboard/discounts', DiscountController::class);
+    Route::resource('dashboard/categories', CategoryController::class);
+    Route::resource('dashboard/sub-categories', SubCategoryController::class);
+    Route::resource('dashboard/brands', BrandController::class);
+    Route::resource('dashboard/orders', OrderController::class);
+    Route::resource('dashboard/shipments', ShipmentController::class);
+    Route::resource('dashboard/users', UserController::class);
 });
-
-Route::resource('dashboard/products', ProductController::class);
-Route::resource('dashboard/discounts', DiscountController::class);
-Route::resource('dashboard/categories', CategoryController::class);
-Route::resource('dashboard/sub-categories', SubCategoryController::class);
-Route::resource('dashboard/brands', BrandController::class);
 
 Route::get('dashboard/sales', function(){
     return view('dashboard.sales',[
@@ -36,11 +40,5 @@ Route::get('dashboard/billing', function(){
         'title' => 'Billing'
     ]);
 });
-
-Route::resource('dashboard/orders', OrderController::class);
-Route::resource('dashboard/shipments', ShipmentController::class);
-
-Route::resource('dashboard/users', UserController::class);
-
 
 require __DIR__.'/auth.php';
