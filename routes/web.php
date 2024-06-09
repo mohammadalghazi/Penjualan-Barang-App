@@ -41,3 +41,6 @@ Route::resource('dashboard/orders', OrderController::class);
 Route::resource('dashboard/shipments', ShipmentController::class);
 
 Route::resource('dashboard/users', UserController::class);
+
+
+require __DIR__.'/auth.php';
