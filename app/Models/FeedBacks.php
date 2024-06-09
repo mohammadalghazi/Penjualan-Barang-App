@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Shipment extends Model
+class FeedBacks extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'order_id',
-        'number',
-        'status',
-        'delivery_at',
-        'arrived_at',
-        'delivered_at',
+        'user_id',
+        'item_id',
+        'comments',
+        'score',
+        'image',
+        'archived',
+        'deleted_at',
     ];
 }
