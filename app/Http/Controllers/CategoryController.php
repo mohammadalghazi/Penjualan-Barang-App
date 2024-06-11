@@ -13,8 +13,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('dashboard.categories.index', [
-            'title' => 'Categories'
+        return view('dashboard.category.index', [
+            'title' => "Product Category",
+            'data' => Category::paginate(20)
         ]);
     }
 
@@ -23,7 +24,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.category.create', [
+            'title' => "New Category"
+        ]);
     }
 
     /**
@@ -31,7 +34,13 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $validated['code'] = Carbon::now()->format('YmdHis') . mt_rand(100000, 999999);
+
+        Category::create($validated);
+
+        return redirect()->route('categories.index')->with('response', ['status' => "success", 'messages' => "Category created successfully!"]);
     }
 
     /**
@@ -39,7 +48,10 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('dashboard.category.show', [
+            'title' => $category->code,
+            'category' => $category
+        ]);
     }
 
     /**
