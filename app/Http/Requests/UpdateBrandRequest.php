@@ -11,7 +11,7 @@ class UpdateBrandRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->user()->role === 'admin';
     }
 
     /**
@@ -21,8 +21,25 @@ class UpdateBrandRequest extends FormRequest
      */
     public function rules(): array
     {
+        $brand = $this->route('brand');
         return [
-            //
+            'name' => 'required|max:255|unique:brans,name,' . $brand->id,
+            'code' => 'required|max:255|unique:brans,code,' . $brand->id,
+            'description' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Name is required',
+            'name.max' => 'Name must be less than 255 characters',
+            'code.required' => 'Code is required',
+            'code.max' => 'Code must be less than 255 characters',
+            'description.required' => 'Description is required',
+            'image.max' => 'Image must be less than 2048 characters',
+            'image.mimes' => 'Image must be jpeg,png,jpg,gif,svg',
         ];
     }
 }

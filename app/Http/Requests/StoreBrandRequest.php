@@ -11,7 +11,7 @@ class StoreBrandRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,24 @@ class StoreBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|max:255|unique:brands',
+            'code' => 'required|max:255|unique:brands',
+            'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Name is required',
+            'name.max' => 'Name must be less than 255 characters',
+            'code.required' => 'Code is required',
+            'code.max' => 'Code must be less than 255 characters',
+            'description.required' => 'Description is required',
+            'image.required' => 'Image is required',
+            'image.max' => 'Image must be less than 2048 characters',
+            'image.mimes' => 'Image must be jpeg,png,jpg,gif,svg',
         ];
     }
 }

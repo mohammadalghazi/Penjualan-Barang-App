@@ -15,4 +15,14 @@ class Order extends Model
         'archived_at',
         'deleted_at',
     ];
+
+    public function payment()
+    {
+        return $this->belongsTo(Payments::class);
+    }
+
+    public function address()
+    {
+        return $this->belongsTo(Addresses::class);
+    }
 }

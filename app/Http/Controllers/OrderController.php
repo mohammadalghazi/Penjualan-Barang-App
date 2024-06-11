@@ -13,9 +13,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('dashboard.orders.index', [
-            'title' => "Pesanan"
-        ]);
+       $orders = Order::all();
+       return view('dashboard.orders.index', [
+           'title' => 'Orders', 'orders' => $orders
+       ]);
     }
 
     /**
@@ -23,7 +24,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.orders.create', [
+            "title" => "Create Order"
+        ]);
     }
 
     /**
@@ -31,7 +34,9 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        //
+        $validateData = $request->validated();
+        Order::create($validateData);
+        return redirect('/orders')->with('success', 'Order created successfully');
     }
 
     /**
@@ -39,7 +44,10 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        $orders = Order::find($order->id);
+        return view('dashboard.orders.show', [
+            "title" => "Detail Order", "order" => $orders
+        ]);
     }
 
     /**
@@ -47,7 +55,10 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $orders = Order::find($order->id);
+        return view('dashboard.orders.edit', [
+            "title" => "Edit Order", "order" => $orders
+        ]);
     }
 
     /**
@@ -55,7 +66,9 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
+        $validateData = $request->validated();
+        $order->update($validateData);
+        return redirect('/orders')->with('success', 'Order updated successfully');
     }
 
     /**
@@ -63,6 +76,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return redirect('/orders')->with('success', 'Order deleted successfully');
     }
 }

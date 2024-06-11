@@ -13,8 +13,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $category = Category::orderBy('created_at', 'desc')->get();
         return view('dashboard.categories.index', [
-            'title' => 'Categories'
+            'title' => 'Categories', 'category' => $category
         ]);
     }
 
@@ -23,7 +24,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.categories.create', [
+            'title' => 'Create Category'
+        ]);
     }
 
     /**
@@ -31,15 +34,20 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $validateData = $request->validate();
+        Category::create($validateData);
+        return redirect('/dashboard/categories')->with('success', 'Category created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(string $id)
     {
-        //
+        $category = Category::find($id);
+        return view('dashboard.categories.show', [
+            'title' => 'Detail Category', 'category' => $category
+        ]);
     }
 
     /**
@@ -47,7 +55,10 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $category = Category::find($category->id);
+        return view('dashboard.categories.edit', [
+            'title' => 'Edit Category', 'category' => $category
+        ]);
     }
 
     /**
@@ -55,7 +66,9 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $validateData = $request->validate();
+        $category->update($validateData);
+        return redirect('/dashboard/categories')->with('success', 'Category updated successfully');
     }
 
     /**
@@ -63,6 +76,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect('/dashboard/categories')->with('success', 'Category deleted successfully');
     }
 }
