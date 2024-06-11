@@ -64,6 +64,8 @@
 @endsection
 
 @section('scripts')
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<script src="/assets/js/script.js"></script>
 <script>
     var ctx2 = document.getElementById("chart-line").getContext("2d");
 
