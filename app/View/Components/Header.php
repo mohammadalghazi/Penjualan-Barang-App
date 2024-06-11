@@ -6,19 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class SideNavItem extends Component
+class Header extends Component
 {
-    public $active;
-    public $href;
-    public $icon;
     /**
      * Create a new component instance.
      */
-    public function __construct($active, $href, $icon)
+    public function __construct()
     {
-        $this->active = $active;
-        $this->href = $href;
-        $this->icon = $icon;
+        //
     }
 
     /**
@@ -26,6 +21,6 @@ class SideNavItem extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.side-nav-item');
+        return view('components.header');
     }
 }

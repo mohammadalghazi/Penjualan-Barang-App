@@ -4,17 +4,20 @@ namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Request;
 use Illuminate\View\Component;
 
-class Navbar extends Component
+class Dcategories extends Component
 {
+    public $url, $img, $alt, $desc;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($href, $src, $alt, $description)
     {
-        //
+        $this->url = $href;
+        $this->img = $src;
+        $this->alt = $alt;
+        $this->desc = $description;
     }
 
     /**
@@ -22,10 +25,6 @@ class Navbar extends Component
      */
     public function render(): View|Closure|string
     {
-        $bc = explode('/', Request::path());
-        return view('components.navbar',[
-            'paths' => $bc,
-            'url' => ''
-        ]);
+        return view('components.dcategories');
     }
 }

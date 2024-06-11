@@ -25,7 +25,7 @@
         <x-sidebar></x-sidebar>
         <main class="d-flex col-md-9 col-12 flex-column flex-fill px-3">
             <x-header>{{ $title }}</x-header>
-            <div class="contents flex-fill overflow-y-auto">
+            <div class="contents d-flex flex-column flex-fill overflow-y-auto">
                 @yield('content')
             </div>
         </main>
@@ -37,6 +37,8 @@
     <!-- Bootstrap@5.3.3 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
+    <script src="/assets/js/chartjs.min.js"></script>
+    <script src="/assets/js/script.js"></script>
     @yield('scripts')
 </body>
 </html>
