@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->enum('type', ['fixed', 'percentage']);
             $table->json('rules');
-            $table->integer('amount');
-            $table->integer('max_amount');
             $table->integer('availability');
             $table->boolean('is_global');
             $table->dateTime('started_at');
