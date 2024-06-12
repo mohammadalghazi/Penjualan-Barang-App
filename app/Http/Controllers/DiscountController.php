@@ -13,8 +13,9 @@ class DiscountController extends Controller
      */
     public function index()
     {
+        $discount = Discount::all();
         return view('dashboard.discounts.index', [
-            'title' => 'Discount'
+            'title' => 'Discounts', 'discount' => $discount
         ]);
     }
 
@@ -23,7 +24,9 @@ class DiscountController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.discounts.create', [
+            'title' => 'Create Discount'
+        ]);
     }
 
     /**
@@ -31,7 +34,9 @@ class DiscountController extends Controller
      */
     public function store(StoreDiscountRequest $request)
     {
-        //
+        $validateData = $request->validated();
+        Discount::create($validateData);
+        return redirect('dashboard.discounts.index')->with('success', 'Discount created successfully');
     }
 
     /**
@@ -39,7 +44,10 @@ class DiscountController extends Controller
      */
     public function show(Discount $discount)
     {
-        //
+        $discount = Discount::find($discount->id);
+        return view('dashboard.discounts.show', [
+            'title' => 'Detail Discount', 'discount' => $discount
+        ]);
     }
 
     /**
@@ -47,7 +55,13 @@ class DiscountController extends Controller
      */
     public function edit(Discount $discount)
     {
-        //
+        $discount = Discount::find($discount->id);
+        if(!$discount) {
+            return response()->json(['message' => 'Discount not found'], 404);
+        }
+        return view('dashboard.discounts.edit', [
+            'title' => 'Edit Discount', 'discount' => $discount
+        ]);
     }
 
     /**
@@ -55,7 +69,10 @@ class DiscountController extends Controller
      */
     public function update(UpdateDiscountRequest $request, Discount $discount)
     {
-        //
+        $discount = Discount::find($discount->id);
+        $validateData = $request->validated();
+        $discount->update($validateData);
+        return redirect('dashboard.discounts.index')->with('success', 'Discount updated successfully');
     }
 
     /**
@@ -63,6 +80,7 @@ class DiscountController extends Controller
      */
     public function destroy(Discount $discount)
     {
-        //
+        $discount->delete();
+        return redirect('dashboard.discounts.index')->with('success', 'Discount deleted successfully');
     }
 }

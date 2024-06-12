@@ -11,9 +11,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('index',[
-        'title' => 'Judul'
-    ]);
+    return view('index');
 });
 
 Route::get('dashboard', function(){
@@ -23,11 +21,11 @@ Route::get('dashboard', function(){
 })->middleware('auth');
 
 Route::middleware('auth')->group(function () {  
+    Route::resource('dashboard/categories', CategoryController::class);
     Route::resource('dashboard/products', ProductController::class);
     Route::resource('dashboard/discounts', DiscountController::class);
-    Route::resource('dashboard/categories', CategoryController::class);
-    Route::resource('dashboard/sub-categories', SubCategoryController::class);
-    Route::resource('dashboard/brands', BrandController::class);
+    Route::resource('/subcategory', SubCategoryController::class);
+    Route::resource('/brands', BrandController::class);
     Route::resource('dashboard/orders', OrderController::class);
     Route::resource('dashboard/shipments', ShipmentController::class);
     Route::resource('dashboard/users', UserController::class);

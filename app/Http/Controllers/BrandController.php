@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+
 
 class BrandController extends Controller
 {
@@ -13,8 +16,9 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return view('dashboard.brands.index',[
-            "title" => "Brands"
+        $brand = Brand::orderBy('created_at', 'desc')->paginate(20);
+        return view('dashboard.brand.index',[
+            "title" => "Brands", "data" => $brand
         ]);
     }
 
@@ -23,7 +27,9 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.brand.create', [
+            "title" => "Create Brand",
+        ]);
     }
 
     /**
@@ -31,7 +37,24 @@ class BrandController extends Controller
      */
     public function store(StoreBrandRequest $request)
     {
-        //
+        // dd($request->validated());
+        $validateData = $request->validated();
+        $code = Carbon::now()->format('YmdHis') . mt_rand(100000, 999999);
+
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() .'.'. uniqid() .'.'. $image->getClientOriginalExtension();
+            $image->storeAs('public/Brands', $imageName);
+            $validateData['image'] = $imageName;
+        } else {
+            $validateData['image'] = null;
+        }
+
+        $validateData['code'] = $code;
+
+        Brand::create($validateData);
+        
+        return redirect()->route('brands.index')->with('response', ['status' => 'success', 'messages' => 'Brand created successfully']);
     }
 
     /**
@@ -39,7 +62,10 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        //
+        $brands = Brand::find($brand->id);
+        return view('dashboard.brands.show', [
+            "title" => "Detail Brand", "brand" => $brands
+        ]);
     }
 
     /**
@@ -47,7 +73,11 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        $brands = Brand::find($brand->id);
+        return view('dashboard.brands.edit', [
+            "title" => "Edit Brand",
+            "brand" => $brands
+        ]);
     }
 
     /**
@@ -55,7 +85,22 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        //
+        $brand = Brand::find($brand->id);
+        $validateData = $request->validated();
+
+        if($request->hasFile('image')) {
+            $oldImage = Brand::find($brand->id)->image;
+            Storage::delete('public/Brands'.$oldImage);
+            $image = $request->file('image');
+            $imageName = time().'.'.uniqid().'.'.$image->getClientOriginalExtension();
+            $image->storeAs('public/Brands', $imageName);
+            $validateData['image'] = $imageName;
+        } else {
+            $validateData['image'] = $brand->image;
+        }
+        
+        $brand->update($validateData);
+        return redirect('brands.index')->with('response',['status' => 'success', 'messages' => 'Brand updated successfully']);
     }
 
     /**
@@ -63,6 +108,11 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $brand = Brand::find($brand->id);
+        if($brand->image) {
+            Storage::delete('public/Brands'.$brand->image);
+        }    
+        $brand->delete();
+        return redirect('brands.index')->with('response',['status' => 'success', 'messages' => 'Brand updated successfully']);
     }
 }

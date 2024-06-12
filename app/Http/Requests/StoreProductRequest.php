@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSubCategoryRequest extends FormRequest
+class StoreProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,14 @@ class StoreSubCategoryRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
+            'size' => 'required|json',
+            'stock' => 'required|integer',
+            'price' => 'required|integer',
+            'status' => 'required|string',
+            'category_id' => 'required|exists:sub_categories,id',
+            'brand_id' => 'required|exists:brands,id',
+            // 'discount_id' => 'nullable|exists:discounts,id',
+            // 'expired_at' => 'required|date',
         ];
     }
 
@@ -33,7 +40,14 @@ class StoreSubCategoryRequest extends FormRequest
         return [
             'name.required' => 'Name is required',
             'description.required' => 'Description is required',
+            'size.required' => 'Size is required',
+            'stock.required' => 'Stock is required',
+            'price.required' => 'Price is required',
+            'status.required' => 'Status is required',
             'category_id.required' => 'Category is required',
+            'brand_id.required' => 'Brand is required',
+            // 'discount_id.required' => 'Discount is required',
+            // 'expired_at.required' => 'Expired date is required',
         ];
     }
 }

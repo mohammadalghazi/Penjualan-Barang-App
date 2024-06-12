@@ -24,4 +24,25 @@ class Product extends Model
         'archived_at',
         'deleted_at',
     ];
+
+    protected $casts = [
+        'size' => 'array',
+        'expired_at' => 'datetime',
+        'archived_at' => 'datetime',
+    ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function discount()
+    {
+        return $this->belongsTo(Discount::class);
+    }
 }
