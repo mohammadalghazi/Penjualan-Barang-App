@@ -1,9 +1,9 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<div class="content container-fluid h-100 d-flex flex-column overflow-auto">
-    <div class="row justify-content-center py-3">
-        <form class="col-6 py-2 rounded bg-light shadow" method="post" action="/dashboard/categories">
+<div class="content container-fluid h-100 d-flex flex-column">
+    <div class="row justify-content-center py-2">
+        <form class="col-6 py-2 rounded bg-light" method="post" action="/dashboard/categories">
             @csrf
             <div class="mb-3">
                 <label for="categoryName" class="form-label">Name</label>

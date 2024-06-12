@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
@@ -49,7 +50,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         return view('dashboard.category.show', [
-            'title' => $category->code,
+            'title' => $category->name,
             'category' => $category
         ]);
     }

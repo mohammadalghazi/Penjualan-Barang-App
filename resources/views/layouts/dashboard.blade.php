@@ -23,7 +23,7 @@
 <body>
     <div class="container-fluid p-0 d-flex">
         <x-sidebar></x-sidebar>
-        <main class="d-flex col-md-9 col-12 flex-column flex-fill px-3">
+        <main class="d-flex col-md col-12 flex-column flex-fill px-3">
             <x-header>{{ $title }}</x-header>
             <div class="contents flex-fill overflow-y-auto">
                 @yield('content')
