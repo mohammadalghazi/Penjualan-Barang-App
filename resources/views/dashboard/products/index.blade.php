@@ -3,14 +3,7 @@
 @section('content')
 <div class="content container-fluid h-75 overflow-auto mt-2">
     <div class="row">
-        <x-dproducts src="/assets/img/sample.jpeg" href="#" stock="9.999" reg="22 June 2024" exp="22 December 2024" alt="">Nama Product</x-dproducts>
-        <x-dproducts src="/assets/img/sample.jpeg" href="#" stock="9.999" reg="22 June 2024" exp="22 December 2024" alt="">Nama Product</x-dproducts>
-        <x-dproducts src="/assets/img/sample.jpeg" href="#" stock="9.999" reg="22 June 2024" exp="22 December 2024" alt="">Nama Product</x-dproducts>
-        <x-dproducts src="/assets/img/sample.jpeg" href="#" stock="9.999" reg="22 June 2024" exp="22 December 2024" alt="">Nama Product</x-dproducts>
-        <x-dproducts src="/assets/img/sample.jpeg" href="#" stock="9.999" reg="22 June 2024" exp="22 December 2024" alt="">Nama Product</x-dproducts>
-        <x-dproducts src="/assets/img/sample.jpeg" href="#" stock="9.999" reg="22 June 2024" exp="22 December 2024" alt="">Nama Product</x-dproducts>
-        <x-dproducts src="/assets/img/sample.jpeg" href="#" stock="9.999" reg="22 June 2024" exp="22 December 2024" alt="">Nama Product</x-dproducts>
-        <x-dproducts src="/assets/img/sample.jpeg" href="#" stock="9.999" reg="22 June 2024" exp="22 December 2024" alt="">Nama Product</x-dproducts>
+        <x-dproducts src="/assets/img/sample.jpeg" href="#" stock="9.999" reg="22 June 2024" exp="22 December 2024" alt="">Product</x-dproducts>
     </div>
 </div>
 <div class="content container-fluid py-2 mt-auto"> 

@@ -16,4 +16,9 @@ class Brand extends Model
         'archived_at',
         'deleted_at',
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

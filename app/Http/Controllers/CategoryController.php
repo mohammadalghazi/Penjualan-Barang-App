@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Carbon\Carbon;
 
 class CategoryController extends Controller
 {
@@ -13,9 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $category = Category::orderBy('created_at', 'desc')->paginate(20);
         return view('dashboard.category.index', [
-            'title' => "Product Category",
-            'data' => Category::paginate(20)
+            'title' => 'Categories', 'data' => $category
         ]);
     }
 
@@ -25,7 +26,7 @@ class CategoryController extends Controller
     public function create()
     {
         return view('dashboard.category.create', [
-            'title' => "New Category"
+            'title' => 'Create Category'
         ]);
     }
 
@@ -34,11 +35,13 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $validated = $request->validated();
+        $code = Carbon::now()->format('YmdHis') . mt_rand(100000, 999999);
 
-        $validated['code'] = Carbon::now()->format('YmdHis') . mt_rand(100000, 999999);
-
-        Category::create($validated);
+        $category = Category::create([
+            'name' => $request->name,
+            'code' => $code,
+            'description' => $request->description
+        ]);
 
         return redirect()->route('categories.index')->with('response', ['status' => "success", 'messages' => "Category created successfully!"]);
     }
@@ -46,10 +49,11 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(string $id)
     {
+        $category = Category::find($id);
         return view('dashboard.category.show', [
-            'title' => $category->code,
+            'title' => 'Show Category',
             'category' => $category
         ]);
     }
@@ -59,7 +63,10 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $category = Category::find($category->id);
+        return view('dashboard.categories.edit', [
+            'title' => 'Edit Category', 'category' => $category
+        ]);
     }
 
     /**
@@ -67,7 +74,9 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $validateData = $request->validate();
+        $category->update($validateData);
+        return redirect('/dashboard/categories')->with('success', 'Category updated successfully');
     }
 
     /**
@@ -75,6 +84,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect('dashboard.categories.index')->with('success', 'Category deleted successfully');
     }
 }

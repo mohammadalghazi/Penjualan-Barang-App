@@ -11,7 +11,7 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,8 +22,18 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:50',
-            'description' => 'nullable|string|max:120'
+            'name' => 'required|max:255|unique:categories,name',
+            'description' => 'required|max:255',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Name is required',
+            'name.max' => 'Name must be less than 255 characters',
+            'description.required' => 'Description is required',
+            'description.max' => 'Description must be less than 255 characters',
         ];
     }
 }

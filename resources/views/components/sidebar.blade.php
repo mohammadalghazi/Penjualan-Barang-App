@@ -19,8 +19,9 @@
 
                 <div class="nav-item pt-3 pb-1 text-secondary">Products</div>
                 <x-snav active="{{ Request::is('dashboard/products') }}" href="/dashboard/products" icon="deployed_code">Products</x-snav>
-                <x-snav active="{{ Request::is('dashboard/brands') }}" href="/dashboard/brands" icon="apartment">Brands</x-snav>
+                <x-snav active="{{ Request::is('/brands') }}" href="{{ route('brands.index') }}" icon="apartment">Brands</x-snav>
                 <x-snav active="{{ Request::is('dashboard/categories') }}" href="/dashboard/categories" icon="category">Category</x-snav>
+                <x-snav active="{{ Request::is('/category') }}" href="{{ route('subcategory.index') }}" icon="category">Subcategory</x-snav>
                 <x-snav active="{{ Request::is('dashboard/discounts') }}" href="/dashboard/discounts" icon="sell">Discounts</x-snav>
                 
                 <div class="nav-item pt-3 pb-1 text-secondary">Management</div>

@@ -16,7 +16,7 @@
             <button type="button" class="btn btn-secondary d-flex" data-bs-toggle="collapse" data-bs-target="#searchFilter">
                 <span class="material-symbols-outlined fs-4">tune</span>
             </button>
-            <a class="btn btn-success d-flex" href="/{{ Request::path() }}/create">
+            <a class="btn btn-success d-flex" href="/{{ Request()->path() }}/create">
                 <span class="material-symbols-outlined fs-4">add</span>
             </a>
         </div>
