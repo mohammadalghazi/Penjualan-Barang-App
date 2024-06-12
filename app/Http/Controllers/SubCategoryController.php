@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\SubCategory;
 use App\Http\Requests\StoreSubCategoryRequest;
 use App\Http\Requests\UpdateSubCategoryRequest;
+use App\Models\Category;
+use Carbon\Carbon;
 
 class SubCategoryController extends Controller
 {
@@ -13,8 +15,9 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        return view('dashboard.categories.sub.index', [
-            "title" => "Sub-Category"
+        $subCategory = SubCategory::orderBy('created_at', 'desc')->paginate(20);
+        return view('dashboard.subcategory.index', [
+            "title" => "Sub-Category", 'data' => $subCategory
         ]);
     }
 
@@ -23,7 +26,10 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::all();
+        return view('dashboard.subcategory.create', [
+            "title" => "Create Sub-Category", 'categories' => $category
+        ]);
     }
 
     /**
@@ -31,7 +37,15 @@ class SubCategoryController extends Controller
      */
     public function store(StoreSubCategoryRequest $request)
     {
-        //
+        $code = Carbon::now()->format('YmdHis') . mt_rand(100000, 999999);
+        SubCategory::create([
+            'name' => $request->name,
+            'code' => $code,
+            'description' => $request->description,
+            'category_id' => $request->category_id
+        ]);
+
+        return redirect()->route('subcategory.index')->with('response', ['status' => 'success', 'messages' => 'Sub-Category created successfully']);
     }
 
     /**
@@ -39,7 +53,10 @@ class SubCategoryController extends Controller
      */
     public function show(SubCategory $subCategory)
     {
-        //
+        $subCategory = SubCategory::find($subCategory->id);
+        return view('dashboard.subcategory.show', [
+            "title" => "Show Sub-Category", 'data' => $subCategory
+        ]);
     }
 
     /**
@@ -47,7 +64,11 @@ class SubCategoryController extends Controller
      */
     public function edit(SubCategory $subCategory)
     {
-        //
+        $category = Category::all();
+        $subCategory = SubCategory::find($subCategory->id);
+        return view('dashboard.subcategory.edit', [
+            "title" => "Edit Sub-Category", 'data' => $subCategory, 'categories' => $category
+        ]);
     }
 
     /**
@@ -55,7 +76,15 @@ class SubCategoryController extends Controller
      */
     public function update(UpdateSubCategoryRequest $request, SubCategory $subCategory)
     {
-        //
+        $code = Carbon::now()->format('YmdHis') . mt_rand(100000, 999999);
+        $subCategory->updated([
+            'name' => $request->name,
+            'code' => $code,
+            'description' => $request->description,
+            'category_id' => $request->category_id
+        ]);
+
+        return redirect()->route('subcategory.index')->with('response', ['status' => 'success', 'messages' => 'Sub-Category updated successfully']);
     }
 
     /**
@@ -63,6 +92,7 @@ class SubCategoryController extends Controller
      */
     public function destroy(SubCategory $subCategory)
     {
-        //
+        $subCategory->delete();
+        return redirect()->route('subcategory.index')->with('response', ['status' => 'success', 'messages' => 'Sub-Category deleted successfully']);
     }
 }

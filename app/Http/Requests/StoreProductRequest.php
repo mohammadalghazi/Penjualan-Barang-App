@@ -22,7 +22,6 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required|string|unique:products,code',
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'size' => 'required|json',
@@ -31,16 +30,14 @@ class StoreProductRequest extends FormRequest
             'status' => 'required|string',
             'category_id' => 'required|exists:sub_categories,id',
             'brand_id' => 'required|exists:brands,id',
-            'discount_id' => 'nullable|exists:discounts,id',
-            'expired_at' => 'required|date',
+            // 'discount_id' => 'nullable|exists:discounts,id',
+            // 'expired_at' => 'required|date',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'code.required' => 'Code is required',
-            'code.unique' => 'Code is already exists',
             'name.required' => 'Name is required',
             'description.required' => 'Description is required',
             'size.required' => 'Size is required',
@@ -49,8 +46,8 @@ class StoreProductRequest extends FormRequest
             'status.required' => 'Status is required',
             'category_id.required' => 'Category is required',
             'brand_id.required' => 'Brand is required',
-            'discount_id.required' => 'Discount is required',
-            'expired_at.required' => 'Expired date is required',
+            // 'discount_id.required' => 'Discount is required',
+            // 'expired_at.required' => 'Expired date is required',
         ];
     }
 }

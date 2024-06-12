@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Carbon\Carbon;
 
 class CategoryController extends Controller
 {
@@ -14,8 +15,8 @@ class CategoryController extends Controller
     public function index()
     {
         $category = Category::orderBy('created_at', 'desc')->paginate(20);
-        return view('dashboard.categories.index', [
-            'title' => 'Categories', 'category' => $category
+        return view('dashboard.category.index', [
+            'title' => 'Categories', 'data' => $category
         ]);
     }
 
@@ -24,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.categories.create', [
+        return view('dashboard.category.create', [
             'title' => 'Create Category'
         ]);
     }
@@ -34,9 +35,13 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $validateData['code'] = Carbon::now()->format('YmdHis') . mt_rand(100000, 999999);
+        $code = Carbon::now()->format('YmdHis') . mt_rand(100000, 999999);
 
-        Category::create($validateData);
+        $category = Category::create([
+            'name' => $request->name,
+            'code' => $code,
+            'description' => $request->description
+        ]);
 
         return redirect()->route('categories.index')->with('response', ['status' => "success", 'messages' => "Category created successfully!"]);
     }
@@ -46,8 +51,9 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
+        $category = Category::find($id);
         return view('dashboard.category.show', [
-            'title' => $category->code,
+            'title' => 'Show Category',
             'category' => $category
         ]);
     }
@@ -79,6 +85,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect('/dashboard/categories')->with('success', 'Category deleted successfully');
+        return redirect('dashboard.categories.index')->with('success', 'Category deleted successfully');
     }
 }

@@ -9,6 +9,7 @@ use App\Models\Discount;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -17,12 +18,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::orderBy('created_at', 'desc')->paginate(20);
         $subcategories = SubCategory::all();
         $brands = Brand::all();
         $discounts = Discount::all();
         return view('dashboard.products.index', [
-            'title' => 'Product', 'products' => $products, 'subcategories' => $subcategories, 'brands' => $brands, 'discounts' => $discounts
+            'title' => 'Product', 'data' => $products, 'subcategories' => $subcategories, 'brands' => $brands, 'discounts' => $discounts
         ]);
     }
 
@@ -31,8 +32,14 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $subcategories = SubCategory::all();
+        $brands = Brand::all();
+        $discounts = Discount::all();
         return view('dashboard.products.create', [
-            'title' => 'Create Product'
+            'title' => 'Create Product',
+            'subcategories' => $subcategories,
+            'brands' => $brands,
+            'discounts' => $discounts
         ]);
     }
 
@@ -41,9 +48,12 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $validateData = $request->validate();
+        // dd($request->validated());
+        $code = 'PDR' . Str::random(6);
+        $validateData = $request->validated();
+        $validateData['code'] = $code;
         Product::create($validateData);
-        return redirect('dashboard.products.index')->with('success', 'Product created successfully');
+        return redirect()->route('dashboard.products.index')->with('success', 'Product created successfully');
     }
 
     /**

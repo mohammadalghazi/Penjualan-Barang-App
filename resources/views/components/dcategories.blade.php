@@ -2,6 +2,7 @@
     <a class="nav-link d-flex bg-white rounded border overflow-hidden" href="/dashboard/categories/{{ $url }}">
         <div class="col-4 d-flex justify-content-center align-items-center">
             <img class="img-fluid" src="{{ $img }}" alt="{{ $alt }}">
+            {{-- Debug: {{ $img }} --}}
         </div>
         <div class="col-8 ps-2">
             <div class="fw-bold col-12 text-nowrap overflow-hidden text-truncate">{{ $slot }}</div>

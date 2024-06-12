@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+
 
 class BrandController extends Controller
 {
@@ -14,9 +16,9 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brand = Brand::orderBy('created_at', 'desc')->get();
-        return view('dashboard.brands.index',[
-            "title" => "Brands", "brand" => $brand
+        $brand = Brand::orderBy('created_at', 'desc')->paginate(20);
+        return view('dashboard.brand.index',[
+            "title" => "Brands", "data" => $brand
         ]);
     }
 
@@ -25,7 +27,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('dashboard.brands.create', [
+        return view('dashboard.brand.create', [
             "title" => "Create Brand",
         ]);
     }
@@ -35,20 +37,24 @@ class BrandController extends Controller
      */
     public function store(StoreBrandRequest $request)
     {
-        $validateData = $request->validate();
+        // dd($request->validated());
+        $validateData = $request->validated();
+        $code = Carbon::now()->format('YmdHis') . mt_rand(100000, 999999);
 
         if($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = time().rand().'.'.$image->getClientOriginalExtension();
-            $image->storeAs('brands', $image, $imageName, 'public');
-            $validation['image'] = $imageName;
+            $imageName = time() .'.'. uniqid() .'.'. $image->getClientOriginalExtension();
+            $image->storeAs('public/Brands', $imageName);
+            $validateData['image'] = $imageName;
         } else {
-            $validation['image'] = null;
+            $validateData['image'] = null;
         }
+
+        $validateData['code'] = $code;
 
         Brand::create($validateData);
         
-        return redirect('/dashboard/brands')->with('success', 'Brand created successfully');
+        return redirect()->route('brands.index')->with('response', ['status' => 'success', 'messages' => 'Brand created successfully']);
     }
 
     /**
@@ -84,17 +90,17 @@ class BrandController extends Controller
 
         if($request->hasFile('image')) {
             $oldImage = Brand::find($brand->id)->image;
-            Storage::delete('public/brands/'.$oldImage);
+            Storage::delete('public/Brands'.$oldImage);
             $image = $request->file('image');
-            $imageName = time().rand().'.'.$image->getClientOriginalExtension();
-            $image->storeAs('brands', $image, $imageName, 'public');
-            $validation['image'] = $imageName;
+            $imageName = time().'.'.uniqid().'.'.$image->getClientOriginalExtension();
+            $image->storeAs('public/Brands', $imageName);
+            $validateData['image'] = $imageName;
         } else {
-            $validation['image'] = $brand->image;
+            $validateData['image'] = $brand->image;
         }
         
         $brand->update($validateData);
-        return redirect('/dashboard/brands')->with('success', 'Brand updated successfully');
+        return redirect('brands.index')->with('response',['status' => 'success', 'messages' => 'Brand updated successfully']);
     }
 
     /**
@@ -104,9 +110,9 @@ class BrandController extends Controller
     {
         $brand = Brand::find($brand->id);
         if($brand->image) {
-            Storage::delete('public/brands/'.$brand->image);
+            Storage::delete('public/Brands'.$brand->image);
         }    
         $brand->delete();
-        return redirect('/dashboard/brands')->with('success', 'Brand deleted successfully');
+        return redirect('brands.index')->with('response',['status' => 'success', 'messages' => 'Brand updated successfully']);
     }
 }
