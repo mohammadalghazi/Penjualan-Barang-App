@@ -53,7 +53,7 @@ class ProductController extends Controller
         $validateData = $request->validated();
         $validateData['code'] = $code;
         Product::create($validateData);
-        return redirect()->route('dashboard.products.index')->with('success', 'Product created successfully');
+        return redirect()->route('products.index')->with('response',['status' => 'success',  'messages' => 'Product created successfully']);
     }
 
     /**

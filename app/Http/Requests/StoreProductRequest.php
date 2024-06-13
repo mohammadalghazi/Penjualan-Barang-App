@@ -30,8 +30,8 @@ class StoreProductRequest extends FormRequest
             'status' => 'required|string',
             'category_id' => 'required|exists:sub_categories,id',
             'brand_id' => 'required|exists:brands,id',
-            // 'discount_id' => 'nullable|exists:discounts,id',
-            // 'expired_at' => 'required|date',
+            'discount_id' => 'nullable|exists:discounts,id',
+            'expired_at' => 'nullable|date',
         ];
     }
 
@@ -46,8 +46,8 @@ class StoreProductRequest extends FormRequest
             'status.required' => 'Status is required',
             'category_id.required' => 'Category is required',
             'brand_id.required' => 'Brand is required',
-            // 'discount_id.required' => 'Discount is required',
-            // 'expired_at.required' => 'Expired date is required',
+            'discount_id.nullable' => 'Discount is required',
+            'expired_at.nullable' => 'Expired date is required',
         ];
     }
 }

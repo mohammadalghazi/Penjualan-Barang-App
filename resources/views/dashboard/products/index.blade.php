@@ -3,10 +3,12 @@
 @section('content')
 <div class="content container-fluid h-75 overflow-auto mt-2">
     <div class="row">
-        <x-dproducts src="/assets/img/sample.jpeg" href="#" stock="9.999" reg="22 June 2024" exp="22 December 2024" alt="">Product</x-dproducts>
+        @foreach ($data as $product)  
+        <x-dproducts src="{{ asset('assets/img/sample.jpeg') }}" href="#" stock="{{ $product->stock }}" reg="{{ $product->created_at }}" exp="{{ $product->expired_at }}" alt="{{ $product->name }}">{{ $product->name }}</x-dproducts>
+        @endforeach
     </div>
 </div>
-<div class="content container-fluid py-2 mt-auto"> 
+{{-- <div class="content container-fluid py-2 mt-auto"> 
     <div class="row">
         <div class="pages col-12 d-flex justify-content-center align-items-center gap-3 fw-bold">
             <a href="#" class="btn btn-secondary p-1 d-flex bg-secondary rounded">
@@ -27,7 +29,7 @@
             </a>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
 
 @section('scripts')
