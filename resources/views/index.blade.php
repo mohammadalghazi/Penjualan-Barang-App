@@ -18,12 +18,44 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0" />
 
     <style>
-
+        body{
+            height: 100vh;
+        }
     </style>
 </head>
 <body>
-    <div class="container-fluid p-0 d-flex">
-        
+    <div class="container-fluid h-100">
+        <header class="row bg-success">
+            <nav class="navbar navbar-expand-xl bg-success-subtle">
+                <div class="container-fluid bg-primary">
+                    <a class="navbar-brand h1" href="#">App Brand</a>
+                    <div class="collapse navbar-collapse bg-primary-subtle">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 bg-warning">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav mb-2 mb-lg-0 bg-danger">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">Sign In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main class="row">
+            B
+        </main>
+        <footer class="row">
+            C
+        </footer>
     </div>
 
     <!-- jQuery@3.7.1 -->
