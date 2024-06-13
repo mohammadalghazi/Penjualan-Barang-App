@@ -25,12 +25,12 @@
 </head>
 <body>
     <div class="container-fluid h-100">
-        <header class="row bg-success">
-            <nav class="navbar navbar-expand-xl bg-success-subtle">
+        <header class="row">
+            <nav class="navbar navbar-expand-xl">
                 <div class="container-fluid bg-primary">
                     <a class="navbar-brand h1" href="#">App Brand</a>
-                    <div class="collapse navbar-collapse bg-primary-subtle">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 bg-warning">
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">Home</a>
                             </li>
@@ -38,7 +38,7 @@
                                 <a class="nav-link" href="#">Link</a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav mb-2 mb-lg-0 bg-danger">
+                        <ul class="navbar-nav mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">Sign In</a>
                             </li>
