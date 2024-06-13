@@ -9,10 +9,6 @@
             <div class="fs-7 col-12 d-flex">
                 <p>{{ $desc }}</p>
             </div>
-            <div class="col-12">
-                ABC
-            </div>
         </div>
-        
     </a>
 </div>

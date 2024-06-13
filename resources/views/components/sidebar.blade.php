@@ -1,4 +1,4 @@
-<aside class="d-flex col-md-3 col-lg-2 col-xl-2 col-xxl-2 border flex-column" data-z-collapse="true" id="sidebar">
+<aside class="d-flex col-md-auto col-lg-auto col-xl-auto col-xxl-auto border flex-column" data-z-collapse="true" id="sidebar">
     <div class="aside container-fluid p-0 d-flex flex-column flex-fill">
         <div class="aside-head d-flex">
             <a class="nav-link p-2 d-flex flex-fill" href="#">
@@ -34,7 +34,7 @@
             <nav class="aside-footer">
                 <x-snav active="{{ Request::is('dashboard/settings') }}" href="/dashboard/settings" icon="settings">Settings</x-snav>
                 <div class="nav-item mb-2">
-                    <a class="nav-link link-danger p-1 d-flex align-items-center border rounded" href="/signout">
+                    <a class="nav-link link-danger p-1 d-flex align-items-center border rounded" href="{{ route('logout') }}">
                         <span class="material-symbols-outlined">logout</span>
                         <span class="flex-fill ps-2 text-nowrap text-truncate">Sign Out</span>
                     </a>

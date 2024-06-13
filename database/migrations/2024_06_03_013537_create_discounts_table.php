@@ -16,14 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->enum('type', ['fixed', 'percentage']);
             $table->json('rules');
-            $table->integer('amount');
-            $table->integer('max_amount');
             $table->integer('availability');
             $table->boolean('is_global');
-            $table->timestamp('started_at');
-            $table->timestamp('expired_at');
+            $table->dateTime('started_at');
+            $table->dateTime('expired_at');
             $table->timestamp('archived_at')->nullable();
-            $table->timestamp('deleted_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

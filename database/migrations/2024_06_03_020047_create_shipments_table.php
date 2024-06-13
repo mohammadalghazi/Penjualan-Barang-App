@@ -16,9 +16,9 @@ return new class extends Migration
             $table->integer('order_id');
             $table->string('number');
             $table->string('status');
-            $table->timestamp('delivery_at');
-            $table->timestamp('arrived_at');
-            $table->timestamp('delivered_at');
+            $table->dateTime('delivery_at');
+            $table->dateTime('arrived_at');
+            $table->dateTime('delivered_at');
             $table->timestamps();
         });
     }

@@ -24,8 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('dashboard/categories', CategoryController::class);
     Route::resource('/products', ProductController::class);
     Route::resource('dashboard/discounts', DiscountController::class);
-    Route::resource('/subcategory', SubCategoryController::class);
-    Route::resource('/brands', BrandController::class);
+    Route::resource('dashboard/subcategory', SubCategoryController::class);
+    Route::resource('dashboard/brands', BrandController::class);
     Route::resource('dashboard/orders', OrderController::class);
     Route::resource('dashboard/shipments', ShipmentController::class);
     Route::resource('dashboard/users', UserController::class);

@@ -1,7 +1,7 @@
 @extends('layouts.list')
 
 @section('content')
-<div class="content container-fluid h-75 overflow-auto mt-2">
+<div class="content container-fluid flex-fill overflow-auto mt-2">
     <div class="row">
         @foreach ($data as $product)  
         <x-dproducts src="{{ asset('assets/img/sample.jpeg') }}" href="#" stock="{{ $product->stock }}" reg="{{ $product->created_at }}" exp="{{ $product->expired_at }}" alt="{{ $product->name }}">{{ $product->name }}</x-dproducts>
@@ -28,7 +28,6 @@
                 <span class="material-symbols-outlined">chevron_right</span>
             </a>
         </div>
-    </div>
 </div> --}}
 @endsection
 

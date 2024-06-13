@@ -101,22 +101,6 @@ aside{
     font-weight: 500;
 }
 
-header{
-    background: #fff;
-    height: 54px;
-    user-select: none;
-}
-header .pages .route{
-    font-size: 16px;
-}
-header .pages .title{
-    font-size: 20px;
-    font-weight: 500;
-}
-header nav{
-    width: fit-content;
-}
-
 main .contents{
     scroll-snap-type: y mandatory;
 }
@@ -130,11 +114,6 @@ main .chart-canvas{
 main .pages .nav-link.active{
     color: #000;
     text-decoration: none;
-}
-
-.colored{
-    background: linear-gradient(rgba(203,12,159,0.2), rgba(72,72,176,0.0), rgba(203,12,159,0), rgba(0, 230, 0, 5));
-    color: #b2b9bf;
 }
 
 /* SM | Small */
@@ -157,6 +136,3 @@ main .pages .nav-link.active{
         width: 100%;
     }
 }
-
-contents flex-fill overflow-y-auto
-contents flex-fill overflow-y-auto

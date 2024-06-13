@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('discount_id')->nullable();
             $table->timestamp('expired_at');
             $table->timestamp('archived_at')->nullable();
-            $table->softDeletes('deleted_at');
+            $table->softDeletes();
             $table->timestamps();
             
             $table->foreign('category_id')->references('id')->on('sub_categories')->onDelete('cascade');
