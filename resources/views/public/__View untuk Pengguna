@@ -1,0 +1,10 @@
+Terapin struktural file pake Folder yak... kek gini
+
+/view/
+    public/
+        contoh/
+            lanjutan/
+                index.blade.php
+            index.blade.php
+            lainnya.blade.php
+            
