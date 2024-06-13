@@ -25,12 +25,12 @@
 </head>
 <body>
     <div class="container-fluid h-100">
-        <header class="row">
-            <nav class="navbar navbar-expand-xl">
-                <div class="container-fluid bg-primary">
+        <header class="row bg-dark">
+            <nav class="navbar navbar-dark navbar-expand-xl">
+                <div class="container-fluid">
                     <a class="navbar-brand h1" href="#">App Brand</a>
                     <div class="collapse navbar-collapse">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">Home</a>
                             </li>
@@ -38,12 +38,13 @@
                                 <a class="nav-link" href="#">Link</a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav mb-2 mb-lg-0">
+                        <ul class="navbar-nav ms-2 mb-2 mb-lg-0">
+                            <div class="vr border"></div>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Sign In</a>
+                                <a class="btn btn-dark" href="{{ route('login') }}">Sign In</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
+                                <a class="btn btn-dark" href="{{ route('register') }}">Sign Up</a>
                             </li>
                         </ul>
                     </div>
