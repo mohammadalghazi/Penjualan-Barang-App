@@ -18,7 +18,8 @@ class BrandController extends Controller
     {
         $brand = Brand::orderBy('created_at', 'desc')->paginate(20);
         return view('dashboard.brand.index',[
-            "title" => "Brands", "data" => $brand
+            "title" => "Brands", 
+            "data" => $brand
         ]);
     }
 
@@ -44,7 +45,7 @@ class BrandController extends Controller
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() .'.'. uniqid() .'.'. $image->getClientOriginalExtension();
-            $image->storeAs('public/Brands', $imageName);
+            $image->storeAs('public/Brands/', $imageName);
             $validateData['image'] = $imageName;
         } else {
             $validateData['image'] = null;
@@ -54,7 +55,11 @@ class BrandController extends Controller
 
         Brand::create($validateData);
         
-        return redirect()->route('brands.index')->with('response', ['status' => 'success', 'messages' => 'Brand created successfully']);
+        return redirect()->route('brands.index')->with(
+            'response', [
+                'status' => 'success', 
+                'messages' => 'Brand created successfully'
+            ]);
     }
 
     /**
@@ -62,9 +67,10 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        $brands = Brand::find($brand->id);
-        return view('dashboard.brands.show', [
-            "title" => "Detail Brand", "brand" => $brands
+        // $brands = Brand::find($brand->id);
+        return view('dashboard.brand.__show', [
+            "title" => "Detail Brand", 
+            "brand" => $brand
         ]);
     }
 
@@ -73,10 +79,10 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        $brands = Brand::find($brand->id);
-        return view('dashboard.brands.edit', [
+        // $brands = Brand::find($brand->id);
+        return view('dashboard.brand.__edit', [
             "title" => "Edit Brand",
-            "brand" => $brands
+            "brand" => $brand
         ]);
     }
 
@@ -85,22 +91,29 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        $brand = Brand::find($brand->id);
+        // dd($request->validated());
+        // $brand = Brand::find($brand->id);
         $validateData = $request->validated();
+
+        $validateData['updated_at'] = Carbon::now();
 
         if($request->hasFile('image')) {
             $oldImage = Brand::find($brand->id)->image;
-            Storage::delete('public/Brands'.$oldImage);
+            Storage::delete('public/Brands/'.$oldImage);
             $image = $request->file('image');
             $imageName = time().'.'.uniqid().'.'.$image->getClientOriginalExtension();
-            $image->storeAs('public/Brands', $imageName);
+            $image->storeAs('public/Brands/', $imageName);
             $validateData['image'] = $imageName;
         } else {
             $validateData['image'] = $brand->image;
         }
         
         $brand->update($validateData);
-        return redirect('brands.index')->with('response',['status' => 'success', 'messages' => 'Brand updated successfully']);
+        return redirect()->route('brands.index')->with(
+            'response',[
+                'status' => 'success', 
+                'messages' => 'Brand updated successfully'
+            ]);
     }
 
     /**
@@ -110,9 +123,13 @@ class BrandController extends Controller
     {
         $brand = Brand::find($brand->id);
         if($brand->image) {
-            Storage::delete('public/Brands'.$brand->image);
+            Storage::delete('public/Brands/'.$brand->image);
         }    
         $brand->delete();
-        return redirect('brands.index')->with('response',['status' => 'success', 'messages' => 'Brand updated successfully']);
+        return redirect()->route('brands.index')->with(
+            'response',[
+                'status' => 'success', 
+                'messages' => 'Brand deleted successfully'
+            ]);
     }
 }

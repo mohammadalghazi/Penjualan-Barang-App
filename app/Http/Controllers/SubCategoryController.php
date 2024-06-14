@@ -17,7 +17,8 @@ class SubCategoryController extends Controller
     {
         $subCategory = SubCategory::orderBy('created_at', 'desc')->paginate(20);
         return view('dashboard.subcategory.index', [
-            "title" => "Sub-Category", 'data' => $subCategory
+            "title" => "Sub-Category", 
+            'data' => $subCategory
         ]);
     }
 
@@ -28,7 +29,8 @@ class SubCategoryController extends Controller
     {
         $category = Category::all();
         return view('dashboard.subcategory.create', [
-            "title" => "Create Sub-Category", 'categories' => $category
+            "title" => "Create Sub-Category", 
+            'categories' => $category
         ]);
     }
 
@@ -45,54 +47,71 @@ class SubCategoryController extends Controller
             'category_id' => $request->category_id
         ]);
 
-        return redirect()->route('subcategory.index')->with('response', ['status' => 'success', 'messages' => 'Sub-Category created successfully']);
+        return redirect()->route('subcategory.index')->with(
+            'response', [
+                'status' => 'success', 
+                'messages' => 'Sub-Category created successfully'
+            ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(SubCategory $subCategory)
+    public function show(SubCategory $subcategory)
     {
-        $subCategory = SubCategory::find($subCategory->id);
-        return view('dashboard.subcategory.show', [
-            "title" => "Show Sub-Category", 'data' => $subCategory
+        // $subcategory = SubCategory::find($subcategory->id);
+        return view('dashboard.subcategory.__show', [
+            "title" => "Show Sub-Category",
+            'subcategory' => $subcategory
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SubCategory $subCategory)
+    public function edit(SubCategory $subcategory)
     {
         $category = Category::all();
-        $subCategory = SubCategory::find($subCategory->id);
-        return view('dashboard.subcategory.edit', [
-            "title" => "Edit Sub-Category", 'data' => $subCategory, 'categories' => $category
+        // $subCategory = SubCategory::find($subcategory->id);
+        return view('dashboard.subcategory.__edit', [
+            "title" => "Edit Sub-Category", 
+            'subcategory' => $subcategory, 
+            'categories' => $category
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSubCategoryRequest $request, SubCategory $subCategory)
+    public function update(UpdateSubCategoryRequest $request, SubCategory $subcategory)
     {
+        // dd($request->all());
         $code = Carbon::now()->format('YmdHis') . mt_rand(100000, 999999);
-        $subCategory->updated([
+        $subcategory->update([
             'name' => $request->name,
             'code' => $code,
             'description' => $request->description,
             'category_id' => $request->category_id
         ]);
 
-        return redirect()->route('subcategory.index')->with('response', ['status' => 'success', 'messages' => 'Sub-Category updated successfully']);
+        return redirect()->route('subcategory.index')->with(
+            'response', [
+                'status' => 'success', 
+                'messages' => 'Sub-Category updated successfully'
+            ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SubCategory $subCategory)
+    public function destroy(SubCategory $subcategory)
     {
-        $subCategory->delete();
-        return redirect()->route('subcategory.index')->with('response', ['status' => 'success', 'messages' => 'Sub-Category deleted successfully']);
+        $subcategory = SubCategory::find($subcategory->id);
+        $subcategory->delete();
+        return redirect()->route('subcategory.index')->with(
+            'response', [
+                'status' => 'success', 
+                'messages' => 'Sub-Category deleted successfully'
+            ]);
     }
 }

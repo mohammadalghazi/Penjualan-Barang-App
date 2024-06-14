@@ -17,6 +17,10 @@
                 <span class="col-5">Expired </span>
                 <span class="col-7">{{ $exp }}</span>
             </div>
+            <div class="fs-7 col-12 d-flex">
+                <span class="col-5">Description </span>
+                <span class="col-7">{{ $desc }}</span>
+            </div>
         </div>
     </a>
 </div>

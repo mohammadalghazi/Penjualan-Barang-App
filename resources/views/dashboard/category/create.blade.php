@@ -3,7 +3,7 @@
 @section('content')
 <div class="content container-fluid h-100 d-flex flex-column">
     <div class="row justify-content-center py-2">
-        <form class="col-6 py-2 rounded bg-light" method="POST" action="{{ route('categories.store') }}">
+        <form class="col-6 py-2 rounded bg-light" method="POST" action="{{ route('category.store') }}">
             @csrf
             <fieldset>
 

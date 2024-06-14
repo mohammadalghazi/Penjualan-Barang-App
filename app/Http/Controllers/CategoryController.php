@@ -16,7 +16,8 @@ class CategoryController extends Controller
     {
         $category = Category::orderBy('created_at', 'desc')->paginate(20);
         return view('dashboard.category.index', [
-            'title' => 'Categories', 'data' => $category
+            'title' => 'Categories', 
+            'data' => $category
         ]);
     }
 
@@ -37,54 +38,82 @@ class CategoryController extends Controller
     {
         $code = Carbon::now()->format('YmdHis') . mt_rand(100000, 999999);
 
-        $category = Category::create([
+        Category::create([
             'name' => $request->name,
             'code' => $code,
             'description' => $request->description
         ]);
 
-        return redirect()->route('categories.index')->with('response', ['status' => "success", 'messages' => "Category created successfully!"]);
+        return redirect()->route('category.index')->with(
+            'response', [
+                'status' => "success", 
+                'messages' => "Category created successfully!"
+            ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        $category = Category::find($id);
-        return view('dashboard.category.show', [
-            'title' => 'Show Category',
-            'category' => $category
-        ]);
-    }
+    /**
+ * Display the specified resource.
+ */
+public function show($id)
+{
+    // dd($category->id);
+    $category = Category::findOrFail($id);
+    return view('dashboard.category.__show', [
+        'title' => 'Category',
+        'category' => $category
+    ]);
+}
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        $category = Category::find($category->id);
-        return view('dashboard.categories.edit', [
-            'title' => 'Edit Category', 'category' => $category
+        $category = Category::findOrFail($id);
+        return view('dashboard.category.__edit', [
+            'title' => 'Edit Category',
+            'category' => $category
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
-    {
-        $validateData = $request->validate();
-        $category->update($validateData);
-        return redirect('/dashboard/categories')->with('success', 'Category updated successfully');
-    }
+    public function update(UpdateCategoryRequest $request, string $id)
+{
+    // dd($request->all());
+    $code = Carbon::now()->format('YmdHis') . mt_rand(100000, 999999);
+    $category = Category::find($id);
+    $category->update([
+        'name' => $request->name,
+        'code' => $code,
+        'description' => $request->description
+    ]);
+
+    return redirect()->route('category.index')->with(
+        'response', [
+            'status' => 'success', 
+            'messages' => 'Category updated successfully'
+        ]);
+}
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
+        $category = Category::find($id);
         $category->delete();
-        return redirect('dashboard.categories.index')->with('success', 'Category deleted successfully');
+
+        return redirect()->route('category.index')->with(
+            'response', [
+                'status' => 'success', 
+                'messages' => 'Category deleted successfully'
+            ]);
     }
 }

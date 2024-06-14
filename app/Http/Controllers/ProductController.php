@@ -8,7 +8,7 @@ use App\Models\Brand;
 use App\Models\Discount;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -51,19 +51,33 @@ class ProductController extends Controller
         // dd($request->validated());
         $code = 'PDR' . Str::random(6);
         $validateData = $request->validated();
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() .'.'. uniqid() .'.'. $image->getClientOriginalExtension();
+            $image->storeAs('public/Products/', $imageName);
+            $validateData['image'] = $imageName;
+        } else {
+            $validateData['image'] = null;
+        }
         $validateData['code'] = $code;
         Product::create($validateData);
-        return redirect()->route('products.index')->with('response',['status' => 'success',  'messages' => 'Product created successfully']);
+        return redirect()->route('products.index')->with(
+            'response',[
+                'status' => 'success',  
+                'messages' => 'Product created successfully'
+            ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(UpdateProductRequest $product)
+    public function show(Product $product)
     {
-        $products = Product::find($product->id);
-        return view('dashboard.products.show', [
-            'title' => 'Detail Product', 'products' => $products
+        // dd($products->id);
+        // $products = Product::findOrFail($product->id);
+        return view('dashboard.products.__show', [
+            'title' => 'Show Product',
+            'product' => $product
         ]);
     }
 
@@ -72,20 +86,43 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $products = Product::find($product->id);
-        return view('dashboard.products.edit', [
-            'title' => 'Edit Product', 'products' => $products
+        $subcategories = SubCategory::all();
+        $brands = Brand::all();
+        $discounts = Discount::all();
+        // $products = Product::find($product->id);
+        return view('dashboard.products.__edit', [
+            'title' => 'Edit Product',
+            'product' => $product,
+            'subcategories' => $subcategories,
+            'brands' => $brands,
+            'discounts' => $discounts
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $validateData = $request->validate();
+        // dd($request->validated());
+        $validateData = $request->validated();
+        // $product = Product::find($product->id);
+        if($request->hasFile('image')) {
+            $oldImage = $product->image;
+            Storage::delete('public/Products/'.$oldImage);
+            $image = $request->file('image');
+            $imageName = time() .'.'. uniqid() .'.'. $image->getClientOriginalExtension();
+            $image->storeAs('public/Products/', $imageName);
+            $validateData['image'] = $imageName;
+        } else {
+            $validateData['image'] = $product->image;
+        }
         $product->update($validateData);
-        return redirect('dashboard.products.index')->with('success', 'Product updated successfully');
+        return redirect()->route('products.index')->with(
+            'response',[
+                'status' => 'success',  
+                'messages' => 'Product updated successfully'
+            ]);
     }
 
     /**
@@ -93,7 +130,14 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        // $product = Product::find($product->id);
+        $oldImage = $product->image;
+        Storage::delete('public/Products/'.$oldImage);
         $product->delete();
-        return redirect('dashboard.products.index')->with('success', 'Product deleted successfully');
+        return redirect()->route('products.index')->with(
+            'response',[
+                'status' => 'success',  
+                'messages' => 'Product deleted successfully'
+            ]);
     }
 }

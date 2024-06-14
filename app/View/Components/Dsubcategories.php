@@ -6,21 +6,19 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Dproducts extends Component
+class Dsubcategories extends Component
 {
-    public $url, $img, $alt, $stock, $reg, $exp, $desc;
+    public $url, $img, $alt, $desc, $reg;
     /**
      * Create a new component instance.
      */
-    public function __construct($href, $src, $alt, $stock, $reg, $exp, $desc)
+    public function __construct($href, $src, $alt, $desc, $reg)
     {
         $this->url = $href;
         $this->img = $src;
         $this->alt = $alt;
-        $this->stock = $stock;
-        $this->reg = $reg;
-        $this->exp = $exp;
         $this->desc = $desc;
+        $this->reg = $reg;
     }
 
     /**
@@ -28,6 +26,6 @@ class Dproducts extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.dproducts');
+        return view('components.dsubcategories');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProductRequest extends FormRequest
@@ -22,7 +23,6 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required|string|unique:products,code,' . $this->route('product')->id,
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'size' => 'required|json',
@@ -39,8 +39,6 @@ class UpdateProductRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'code.required' => 'Code is required',
-            'code.unique' => 'Code is already exists',
             'name.required' => 'Name is required',
             'description.required' => 'Description is required',
             'size.required' => 'Size is required',
