@@ -36,7 +36,11 @@ class DiscountController extends Controller
     {
         $validateData = $request->validated();
         Discount::create($validateData);
-        return redirect('dashboard.discounts.index')->with('success', 'Discount created successfully');
+        return redirect('dashboard.discounts.index')->with(
+            'response', [
+                'status' => "success", 
+                'messages' => "Discount created successfully!"
+        ]);
     }
 
     /**
@@ -46,7 +50,8 @@ class DiscountController extends Controller
     {
         $discount = Discount::find($discount->id);
         return view('dashboard.discounts.show', [
-            'title' => 'Detail Discount', 'discount' => $discount
+            'title' => 'Detail Discount', 
+            'discount' => $discount
         ]);
     }
 
@@ -60,7 +65,8 @@ class DiscountController extends Controller
             return response()->json(['message' => 'Discount not found'], 404);
         }
         return view('dashboard.discounts.edit', [
-            'title' => 'Edit Discount', 'discount' => $discount
+            'title' => 'Edit Discount', 
+            'discount' => $discount
         ]);
     }
 
@@ -72,7 +78,11 @@ class DiscountController extends Controller
         $discount = Discount::find($discount->id);
         $validateData = $request->validated();
         $discount->update($validateData);
-        return redirect('dashboard.discounts.index')->with('success', 'Discount updated successfully');
+        return redirect('dashboard.discounts.index')->with(
+            'response', [
+                'status' => "success", 
+                'messages' => "Discount updated successfully!"
+            ]);
     }
 
     /**
@@ -81,6 +91,10 @@ class DiscountController extends Controller
     public function destroy(Discount $discount)
     {
         $discount->delete();
-        return redirect('dashboard.discounts.index')->with('success', 'Discount deleted successfully');
+        return redirect('dashboard.discounts.index')->with(
+            'response', [
+                'status' => "success", 
+                'messages' => "Discount deleted successfully!"
+            ]);
     }
 }

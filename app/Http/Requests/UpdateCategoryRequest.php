@@ -11,7 +11,7 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->role === 'admin';
+        return true;
     }
 
     /**
@@ -21,10 +21,8 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $category = $this->route('category');
         return [
-            'name' => 'required|max:255|unique:categories,name,' . $category->id,
-            'code' => 'required|max:255|unique:categories,code,' . $category->id,
+            'name' => 'required|max:255|unique:categories,name,',
             'description' => 'required|max:255',
         ];
     }
@@ -34,8 +32,6 @@ class UpdateCategoryRequest extends FormRequest
         return [
             'name.required' => 'Name is required',
             'name.max' => 'Name must be less than 255 characters',
-            'code.required' => 'Code is required',
-            'code.max' => 'Code must be less than 255 characters',
             'description.required' => 'Description is required',
             'description.max' => 'Description must be less than 255 characters',
         ];

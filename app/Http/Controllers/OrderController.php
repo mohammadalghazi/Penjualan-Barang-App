@@ -15,7 +15,8 @@ class OrderController extends Controller
     {
        $orders = Order::all();
        return view('dashboard.orders.index', [
-           'title' => 'Orders', 'orders' => $orders
+           'title' => 'Orders', 
+           'orders' => $orders
        ]);
     }
 
@@ -36,7 +37,11 @@ class OrderController extends Controller
     {
         $validateData = $request->validated();
         Order::create($validateData);
-        return redirect('/orders')->with('success', 'Order created successfully');
+        return redirect('/orders')->with(
+            'response', [
+                'status' => 'success',
+                'messages' => 'Order created successfully'
+            ]);
     }
 
     /**
@@ -46,7 +51,8 @@ class OrderController extends Controller
     {
         $orders = Order::find($order->id);
         return view('dashboard.orders.show', [
-            "title" => "Detail Order", "order" => $orders
+            "title" => "Detail Order", 
+            "order" => $orders
         ]);
     }
 
@@ -57,7 +63,8 @@ class OrderController extends Controller
     {
         $orders = Order::find($order->id);
         return view('dashboard.orders.edit', [
-            "title" => "Edit Order", "order" => $orders
+            "title" => "Edit Order", 
+            "order" => $orders
         ]);
     }
 
@@ -68,7 +75,11 @@ class OrderController extends Controller
     {
         $validateData = $request->validated();
         $order->update($validateData);
-        return redirect('/orders')->with('success', 'Order updated successfully');
+        return redirect('/orders')->with(
+            'response', [
+                'status' => 'success',
+                'messages' => 'Order updated successfully'
+            ]);
     }
 
     /**
@@ -77,6 +88,10 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         $order->delete();
-        return redirect('/orders')->with('success', 'Order deleted successfully');
+        return redirect('/orders')->with(
+            'response', [
+                'status' => 'success',
+                'messages' => 'Order deleted successfully'
+            ]);
     }
 }

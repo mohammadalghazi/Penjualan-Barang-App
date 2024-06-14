@@ -21,8 +21,8 @@ Route::get('dashboard', function(){
 })->middleware('auth');
 
 Route::middleware('auth')->group(function () {  
-    Route::resource('dashboard/categories', CategoryController::class);
-    Route::resource('/products', ProductController::class);
+    Route::resource('dashboard/category', CategoryController::class);
+    Route::resource('dashboard/products', ProductController::class);
     Route::resource('dashboard/discounts', DiscountController::class);
     Route::resource('dashboard/subcategory', SubCategoryController::class);
     Route::resource('dashboard/brands', BrandController::class);

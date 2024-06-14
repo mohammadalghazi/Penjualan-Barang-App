@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('stock');
             $table->integer('price');
             $table->string('status');
+            $table->string('image');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('discount_id')->nullable();
