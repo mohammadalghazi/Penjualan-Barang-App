@@ -67,25 +67,26 @@
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-              <div class="mb-3">
+                <div class="mb-3">
                     <label for="productCategory" class="form-label">Category</label>
                     <select class="form-control" name="category_id" id="productCategory">
-                        <option value="{{ $product->category_id }}">{{ $product->category->name }}</option>
-                        @foreach ($subcategories as $category)
-                            <option value="{{ $category->category_id }}">{{ $category->name }}</option>
+                        @foreach ($subcategories as $subcategory)
+                            <option value="{{ $subcategory->id }}" {{ $subcategory->id == $product->category_id ? 'selected' : '' }}>
+                                {{ $subcategory->name }}
+                            </option>
                         @endforeach
                     </select>
                     @error('category_id')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-            
                <div class="mb-3">
                     <label for="productBrand" class="form-label">Brand</label>
                     <select class="form-control" name="brand_id" id="productBrand">
-                        <option value="{{ $product->brand_id }}">{{ $product->brand->name }}</option>
                         @foreach ($brands as $brand)
-                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                            <option value="{{ $brand->id }}" {{ $brand->id == $product->brand_id ? 'selected' : '' }}>
+                                {{ $brand->name }}
+                            </option>
                         @endforeach
                     </select>
                     @error('brand_id')
