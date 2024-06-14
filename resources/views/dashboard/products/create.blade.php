@@ -33,24 +33,39 @@
                 </div>
             
                 <div class="mb-3">
-                    <label for="productCategory" class="form-label">Product Category</label>
-                    <select class="form-select" name="category_id" id="productCategory">
-                        <!-- Data -->
+                    <label for="productDiscount" class="form-label">Discount</label>
+                    <select class="form-control" name="discount_id" id="productDiscount">
+                        <option value="" selected disabled>Select Discount</option>
+                        @foreach ($discounts as $discount)
+                            <option value="{{ $discount->id }}">{{ $discount->name }}</option>
+                        @endforeach
                     </select>
+                </div>
+                <div class="mb-3">
+                    <label for="productExpired" class="form-label">Expired</label>
+                    <input type="date" class="form-control" name="expired_at" id="productExpired">
+                </div>
+                <div class="mb-3">
+                    <label for="productCategory" class="form-label">Category</label>
+                    <select class="form-control" name="category_id" id="productCategory" required>
+                        <option value="" selected disabled>Select Category</option>
+                        @foreach ($subcategories as $category)
+                            <option value="{{ $category->category_id }}">{{ $category->name }}</option>
+                        @endforeach
                 </div>
             
                 <div class="mb-3">
-                    <label for="productBrand" class="form-label">Product Brand</label>
-                    <select class="form-select" name="brand_id" id="productBrand">
-                        <!-- Data -->
-                    </select>
+                    <label for="productBrand" class="form-label">Brand</label>
+                    <select class="form-control" name="brand_id" id="productBrand" required>
+                        <option value="" selected disabled>Select Brand</option>
+                        @foreach ($brands as $brand)
+                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                        @endforeach
                 </div>
             
                 <div class="mb-3">
-                    <label for="productDiscount" class="form-label">Product Discount</label>
-                    <select class="form-select" name="discount_id" id="productDiscount">
-                        <!-- Options for discounts -->
-                    </select>
+                    <label for="productDescription" class="form-label">Description</label>
+                    <textarea class="form-control" name="description" id="productDescription" rows="3"></textarea>
                 </div>
             
                 <div class="mb-3">
