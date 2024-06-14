@@ -70,7 +70,7 @@
                     <select class="form-control" name="category_id" id="productCategory">
                         <option value="" selected disabled>Select Category</option>
                         @foreach ($subcategories as $category)
-                            <option value="{{ $category->category_id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
                     @error('category_id')

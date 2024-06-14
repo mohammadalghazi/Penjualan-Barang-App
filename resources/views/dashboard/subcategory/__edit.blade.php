@@ -18,11 +18,10 @@
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Category</label>
                     <select name="category_id" class="form-control">
-                        <option value="{{ $subcategory->category_id }}" selected>{{ $subcategory->category->name }}</option>
                         @foreach($categories as $category)
-                            @if ($category->id !== $subcategory->category_id)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endif
+                            <option value="{{ $category->id }}" {{ $subcategory->category_id == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
                         @endforeach
                     </select>
                     @error('category_id')
