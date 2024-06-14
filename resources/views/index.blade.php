@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- Google Font | Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Google Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
@@ -42,12 +42,43 @@
         }
         .navbar-nav .nav-link.active,
         .navbar-nav .nav-link:hover {
-            color: #007bff;
+            color: #0cc0df;
         }
+        .btn-login,
+        .btn-signup {
+            margin-left: 10px;
+            font-weight: 500;
+            border-radius: 5px;
+        }
+        .btn-login {
+            background-color: #fff;
+            color: #0cc0df;
+            border: 1;
+            border-color: #0cc0df;
+        }
+        .btn-login:hover {
+            background-color: #0cc0df;
+            color: #fff;
+        }
+        .btn-signup {
+            background-color: #0cc0df;
+            color: #fff;
+        }
+        .btn-signup:hover {
+            background-color: #fff;
+            color: #0cc0df;
+            border: 1;
+            border-color: #0cc0df;
+        }
+
         .carousel-item img {
             width: 100%;
             height: 60vh;
             object-fit: cover;
+        }
+
+        #nav-cat1-tab, #nav-cat2-tab {
+            color: #0cc0df;
         }
         .product-card {
             margin-bottom: 30px;
@@ -70,7 +101,7 @@
         .card-title {
             font-weight: 600;
             margin-bottom: 10px;
-            color: #007bff;
+            color: #0cc0df;
         }
         .card-text {
             font-size: 14px;
@@ -78,8 +109,8 @@
             margin-bottom: 15px;
         }
         .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
+            background-color: #0cc0df;
+            border-color: #0cc0df;
             border-radius: 5px;
             padding: 10px 20px;
             font-weight: 500;
@@ -105,11 +136,11 @@
             margin: 0 auto;
         }
         footer {
-            background-color: #007bff;
+            background-color: #02262c;
             color: #fff;
+            height: 150px;
             padding: 20px 0;
             text-align: center;
-            display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap; /* Allow items to wrap */
@@ -117,6 +148,7 @@
         .footer-logo {
             height: 40px;
             margin-bottom: 10px;
+            margin-top: 10px;
         }
         .footer-links {
             display: flex;
@@ -136,16 +168,19 @@
             text-decoration: underline;
         }
         .footer-copy {
-            margin-top: 10px;
+            margin-top: 20px;
+            margin-left: 45px;
             width: 100%;
-            text-align: center;
+            text-align: left;
+            font-weight: 100;
         }
         .pagination .page-item .page-link {
-            color: #007bff;
+            color: #0cc0df;
         }
         .pagination .page-item.active .page-link {
-            background-color: #007bff;
-            border-color: #007bff;
+            background-color: #0cc0df;
+            border-color: #0cc0df;
+            color: #fff;
         }
     </style>
 </head>
@@ -153,36 +188,40 @@
     <div class="container-fluid">
         <!-- Header -->
         <header class="row">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <img src="{{ asset('assets/img/logo-capstone1.png') }}" alt="Logo" class="d-inline-block align-text-top">
                 </a>
-
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Products</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">FAQ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Contact</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"><span class="material-icons">shopping_cart</span></a>
-                            </li>
-                        </ul>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span class="material-icons">shopping_cart</span></a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="#" class="btn btn-login btn-sm">Login</a>
+                        <a href="#" class="btn btn-signup btn-sm">Sign Up</a>
                     </div>
                 </div>
-            </nav>
+            </div>
+        </nav>
+
         </header>
 
         <!-- Slideshow -->
@@ -264,7 +303,7 @@
         </section>
 
         <!-- Footer -->
-        <footer class="bg-dark text-light py-4 position-relative">
+        <footer class="position-relative">
             <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
                 <!-- Logo di pojok kiri atas -->
                 <div class="footer-logo mb-3 mb-md-0">
@@ -272,17 +311,21 @@
                 </div>
 
                 <!-- Menu di footer -->
-                <ul class="footer-links d-flex justify-content-center flex-wrap gap-3 mb-3 mb-md-0">
-                    <li class="nav-item"><a href="#" class="nav-link text-light text-decoration-none">Products</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-light text-decoration-none">About</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-light text-decoration-none">FAQ</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-light text-decoration-none">Contact</a></li>
+                <ul class="footer-links d-flex justify-content-right flex-wrap gap-3 mb-3 mb-md-0">
+                    <li class="nav-item"><a href="#">Products</a></li>
+                    <li class="nav-item"><a href="#">About</a></li>
+                    <li class="nav-item"><a href="#">FAQ</a></li>
+                    <li class="nav-item"><a href="#">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><span class="material-icons">shopping_cart</span></a></li>
                 </ul>
 
                 <!-- Copyright di pojok kiri bawah -->
                 <div class="footer-copy position-absolute bottom-0 start-0 p-3 mt-3">
-                    <p class="mb-0">&copy; 2023 Your Company. All rights reserved.</p>
+                    <p class="mb-0">&copy; Mega Mart 2024. All rights reserved.</p>
                 </div>
+                <div class="d-flex">
+                        <a href="#" class="btn btn-signup btn-sm">Sign Up</a>
+                    </div>
             </div>
         </footer>
     </div>
